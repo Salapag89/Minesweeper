@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    [SerializeField] List<Sprite> sprites;
+    [SerializeField] private List<Sprite> sprites;
+    private CellManager cellManager;
 
     private int[] coord = new int[2];
     private bool isClicked = false;
@@ -50,7 +51,7 @@ public class Cell : MonoBehaviour
         {
             isClicked = true;
             GetComponent<SpriteRenderer>().sprite = sprites[1];
-            SpawnArea.Instance.EasyClear(coord[0], coord[1]);
+            gamemanager.ClickNeighbors(coord[0], coord[1]);
             return;
         }
 
