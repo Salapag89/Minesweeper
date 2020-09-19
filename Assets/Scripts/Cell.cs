@@ -38,6 +38,7 @@ public class Cell : MonoBehaviour
         isMine = false;
         neighboringMines = 0;
         GetComponent<SpriteRenderer>().sprite = sprites[0];
+        GetComponentInChildren<TextMeshPro>().SetText(String.Empty);
     }
 
     //Handle left clicks on the cell to display the count or if the cell is a mine
