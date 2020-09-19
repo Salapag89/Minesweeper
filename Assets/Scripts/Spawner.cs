@@ -5,27 +5,21 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject cell;
-    [SerializeField] CellManager cellManager;
+    [SerializeField] private CellManager cellManager;
+    [SerializeField] private int fieldSizeX = 10;
+    [SerializeField] private int fieldSizeY = 10;
 
     public Color GizmosColor = new Color(0.5f, 0.5f, 0.5f, 0.2f);
     private Vector2 cellSize;
-    private int fieldSizeX;
-    private int fieldSizeY;
 
     private void Start()
     {
+
         cellSize.y = cell.GetComponent<SpriteRenderer>().size.y * 2;
         cellSize.x = cell.GetComponent<SpriteRenderer>().size.x * 2;
 
         SpawnCells();
         cellManager.SetMinefield();
-    }
-
-    //Set the size of the minefield
-    public void SetFieldSize(int x, int y)
-    {
-        fieldSizeX = x;
-        fieldSizeY = y;
     }
 
     //Instantiate the cells depending on the field size, add cells to the list of cells

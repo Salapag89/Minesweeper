@@ -7,9 +7,9 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     [SerializeField] private List<Sprite> sprites;
-    private CellManager cellManager;
+    [SerializeField] private CellManager cellManager;
 
-    private int[] coord = new int[2];
+    [SerializeField] private int[] coord = new int[2];
     private bool isClicked = false;
     private bool isMine = false;
     private int neighboringMines = 0;
@@ -29,6 +29,9 @@ public class Cell : MonoBehaviour
     //Increase neighboring mine count
     public void IncreaseMineCount() => neighboringMines++;
 
+    //Set isClicked to true for game over
+    public void Clicked() => isClicked = true;
+
     public void Reset()
     {
         isClicked = false;
@@ -41,23 +44,36 @@ public class Cell : MonoBehaviour
     public void OnMouseUp()
     {
         if (isMine)
-            GetComponent<SpriteRenderer>().sprite = sprites[2];
-        else if (neighboringMines > 0)
         {
-            GetComponent<SpriteRenderer>().sprite = sprites[1];
-            GetComponentInChildren<TextMeshPro>().SetText(neighboringMines.ToString());
-        }
-        else if (!isClicked)
+            if (!cellManager.IsGameOver())
+                cellManager.GameOver();
+            GetComponent<SpriteRenderer>().sprite = sprites[2];
+            return;
+        }            
+
+        if (!isClicked)
         {
             isClicked = true;
-            GetComponent<SpriteRenderer>().sprite = sprites[1];
-            gamemanager.ClickNeighbors(coord[0], coord[1]);
-            return;
+            
+            if (neighboringMines > 0)
+            {
+                GetComponent<SpriteRenderer>().sprite = sprites[1];
+                GetComponentInChildren<TextMeshPro>().SetText(neighboringMines.ToString());
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sprite = sprites[1];
+                cellManager.ClickNeighbors(coord[0], coord[1]);
+            }
+
         }
 
-        isClicked = true;
+    }
 
+    private void PrintCoords()
+    {
+        print(coord[0].ToString() + ',' + coord[1].ToString());
     }
 
     
-    }
+ }

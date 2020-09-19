@@ -270,6 +270,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ab39f4e7f54031541ac93f1286434345, type: 3}
   - {fileID: 21300000, guid: 900c2ddc14443514f935d3af2a8bb74e, type: 3}
   - {fileID: 21300000, guid: 050276dc614ca8e47a18ac9b252508cc, type: 3}
+  cellManager: {fileID: 11400000, guid: e980757aceb4c5b43a3f07075ab56371, type: 2}
 --- !u!61 &476078643
 BoxCollider2D:
   m_ObjectHideFlags: 0
